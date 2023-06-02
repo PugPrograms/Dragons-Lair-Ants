@@ -17,15 +17,21 @@ public class DragonsLairShip extends BasicSpaceship {
    // The name to give to the current ship.
    String name;
 
-   public DragonsLairShip(String desiredIp, String name) {
+   Color colorToSet;
+
+   int skinToUse;
+
+   public DragonsLairShip(String desiredIp, String name, Color color, int skin) {
       this.name = name;
+      this.colorToSet = color;
+      this.skinToUse = skin;
       TextClient.run(desiredIp, this);
    }
 
    @Override
    public RegistrationData registerShip(int numImages, int worldWidth, int worldHeight) {
       // parameters are ship name, color of ship text (RGB), and index of image
-      return new RegistrationData(name, new Color(255, 255, 255), 6);
+      return new RegistrationData(name, colorToSet, skinToUse);
    }
 
    @Override
