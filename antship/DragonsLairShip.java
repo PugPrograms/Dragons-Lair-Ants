@@ -17,17 +17,9 @@ public class DragonsLairShip extends BasicSpaceship {
    // The name to give to the current ship.
    String name;
 
-   // Ip to join to.
-   static String desiredIp = "127.0.1.1";
-
    public DragonsLairShip(String desiredIp, String name) {
       this.name = name;
       TextClient.run(desiredIp, this);
-   }
-
-   // Keeping this here for testing purposes.
-   public static void main(String[] args) {
-      TextClient.run(desiredIp, new DragonsLairShip(desiredIp, "testant"));
    }
 
    @Override
