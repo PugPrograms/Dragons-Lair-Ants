@@ -14,7 +14,7 @@ public class DragonsLairShip extends BasicSpaceship {
    double minimumSpeed = 20d;
 
    // Ip to join to.
-   static String desiredIp = "10.40.30.77";
+   static String desiredIp = "127.0.1.1";
    
    public static void main(String[] args) {
       TextClient.run(desiredIp, new DragonsLairShip());
@@ -42,7 +42,6 @@ public class DragonsLairShip extends BasicSpaceship {
 
    // Function to check if we are at the minimum speed, if not, accelerate up to it.
    public ShipCommand SpeedChecker() {
-      System.out.println(ship.getSpeed());
       if (ship.getSpeed() < minimumSpeed) {
          return new ThrustCommand('B', 0.1, 1);
       }
