@@ -1,0 +1,1 @@
+SBA_Serv.exe -n basicgame_findthemiddle.cfg no_gravity_drag.cfg projector.cfg %*

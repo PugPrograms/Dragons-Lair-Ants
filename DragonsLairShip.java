@@ -4,13 +4,20 @@ import ihs.apcs.spacebattle.*;
 import ihs.apcs.spacebattle.commands.*;
 
 public class DragonsLairShip extends BasicSpaceship {
+   // Global reference to ship
    ObjectStatus ship;
+
+   // Global reference to game info
    BasicGameInfo gameInfo;
+
+   // Minimum speed to cruise at all times.
+   double minimumSpeed = 20d;
+
+   // Ip to join to.
+   static String desiredIp = "10.40.30.77";
    
    public static void main(String[] args) {
-      // "10.40.30.77" is typically the IP address of Mr. Stutler's projector computer
-      // "FindTheMiddleShip" is the name of the current class
-      TextClient.run("10.40.30.143", new DragonsLairShip());
+      TextClient.run(desiredIp, new DragonsLairShip());
    }
 
    @Override
@@ -21,24 +28,23 @@ public class DragonsLairShip extends BasicSpaceship {
 
    @Override
    public ShipCommand getNextCommand(BasicEnvironment env) {
-      // every time getNextCommand() is called, return a command
-      // all commands are subclasses of ShipCommand superclass
       ship = env.getShipStatus();
       gameInfo = env.getGameInfo();
-      
-      var speed = SpeedChecker('B');
-      if (speed != null) {
-         return speed;
-      }
-      
-      
+
+      // Check our speed.
+      var speedChecker = SpeedChecker();
+      if (speedChecker != null) return speedChecker;
+
+
+      // If nothing happens, simpy idle.
       return new IdleCommand(0.1);
    }
-   
-   public ShipCommand SpeedChecker(char dir) {
+
+   // Function to check if we are at the minimum speed, if not, accelerate up to it.
+   public ShipCommand SpeedChecker() {
       System.out.println(ship.getSpeed());
-      if (ship.getSpeed() < 100) {
-         return new ThrustCommand(dir, 0.1, 1);
+      if (ship.getSpeed() < minimumSpeed) {
+         return new ThrustCommand('B', 0.1, 1);
       }
       else {
          return null;
